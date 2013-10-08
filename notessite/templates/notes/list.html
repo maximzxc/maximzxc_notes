@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if note_list %}
+    <ul>
+    {% for note in note_list %}
+	Title:<b> {{note.title}}</b><br>
+		{{note.content}}<br>
+		Note was added: {{note.added}}<br>
+		Last update: {{note.updated}}<br><br>
+    {% endfor %}
+    </ul>
+    {% else %}
+    You don't have webnotes
+    {% endif %}
+{% endblock %}
