@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="{{STATIC_URL}}/img/favicon.png">
+    <link rel="shortcut icon" href="http://getbootstrap.com/assets/ico/favicon.png">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>Starter Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{STATIC_URL}}/css/bootstrap.css" rel="stylesheet">
+    <link href="Starter%20Template%20for%20Bootstrap_files/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{STATIC_URL}}/css/jumbotron.css" rel="stylesheet">
+    <link href="Starter%20Template%20for%20Bootstrap_files/starter-template.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -47,17 +47,18 @@
     <div class="container">
 
       <div class="starter-template">
-        <p>{% block content  %} {% endblock  %} </p>
+        <h1>Bootstrap starter template</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
       </div>
 
     </div><!-- /.container -->
 
 
-  <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{STATIC_URL}}/js/jquery.js"></script>
-    <script src="{{STATIC_URL}}/js/bootstrap.js"></script>
+    <script src="Starter%20Template%20for%20Bootstrap_files/jquery.js"></script>
+    <script src="Starter%20Template%20for%20Bootstrap_files/bootstrap.js"></script>
   
 
 </body></html>

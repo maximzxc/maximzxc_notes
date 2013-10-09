@@ -47,7 +47,8 @@
     <div class="container">
 
       <div class="starter-template">
-        <p>{% block content  %} {% endblock  %} </p>
+        <h1>{%  block title1  %} {% endblock %}</h1>
+        <p>{% block content1  %} {% endblock  %} </p>
       </div>
 
     </div><!-- /.container -->
