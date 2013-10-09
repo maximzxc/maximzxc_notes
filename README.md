@@ -31,3 +31,7 @@ http://localhost:8000/notes/list/
 <b>for addind new notes or deleting exists open browser and go to:</b>
 
 ttp://localhost:8000/admin/
+
+<b>for testing application type:</b>
+
+python manage.py test Notes
