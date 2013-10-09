@@ -1,4 +1,4 @@
-type this command in terminal for install this application:
+<b>type this command in terminal for install this application:</b>
 
 git clone https://github.com/maximzxc/maximzxc_notes/tree/create-app-that-shows-list-of-text-notes
 
@@ -24,14 +24,10 @@ python manage.py loaddata fixtures notes_views_testdata.json
 
 python manage.py runserver
 
-open browser and go to:
+<b>open browser and go to see notes that already exists:</b>
 
 http://localhost:8000/notes/list/
 
-here you see notes that already exists
-
-open browser and go to:
+<b>for addind new notes or deleting exists open browser and go to:</b>
 
 ttp://localhost:8000/admin/
-
-for addind new notes or deleting exists
