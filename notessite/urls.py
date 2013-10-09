@@ -4,8 +4,6 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from django.conf.urls.defaults import *
-
 urlpatterns = patterns('',
 	(r'^notes/', include('notessite.apps.Notes.urls')),
     # Examples:

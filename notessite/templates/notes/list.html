@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if note_list %}
+    {% if notes_list %}
     <ul>
-    {% for note in note_list %}
+    {% for note in notes_list %}
 	Title:<b> {{note.title}}</b><br>
 		{{note.content}}<br>
 		Note was added: {{note.added}}<br>

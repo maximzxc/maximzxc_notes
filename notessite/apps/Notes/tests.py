@@ -6,10 +6,9 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from models import Note
 
 class NotesViewsTestCase(TestCase):
-	fixtures = ['notes_views_testdata.json']	
+	fixtures = ['notes_views_testdata.json']
 
 	def test_index(self):
 		resp = self.client.get('/notes/list/')

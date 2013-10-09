@@ -1,8 +1,6 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns
 
-import views
+from views import NotesListView
 
 urlpatterns = patterns('',
-
-		url(r'^list/$', views.notes_list, name = 'notes_list'),
-)
+                       (r'^list/$', NotesListView.as_view()))
