@@ -1,4 +1,5 @@
 Django==1.5.4
 pep8==1.4.6
 pyflakes==0.7.3
-coverage==3.7
+django-webtest==1.7.5
+WebTest==2.0.9
