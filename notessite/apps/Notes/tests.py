@@ -15,3 +15,5 @@ class NotesViewsTestCase(TestCase):
     def test_index(self):
         resp = self.client.get(reverse('notes_list'))
         self.assertEqual(resp.status_code, 200)
+        resp1 = self.client.get(reverse('home'))
+        self.assertEqual(resp1.status_code, 200)
