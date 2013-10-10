@@ -1,6 +1,7 @@
-from django.conf.urls import patterns
+from django.conf.urls import patterns, url
 
 from views import NotesListView
 
 urlpatterns = patterns('',
-                       (r'^list/$', NotesListView.as_view()))
+                       url(r'^list/$', NotesListView.as_view(),
+                           name="notes_list"))

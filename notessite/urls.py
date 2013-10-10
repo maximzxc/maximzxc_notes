@@ -11,5 +11,5 @@ import views
 urlpatterns = patterns('',
                        (r'^notes/', include('notessite.apps.Notes.urls')),
                        url(r'^$', views.home, name='home'),
-                       (r'^admin/', include(admin.site.urls))) + static(
-settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+                       (r'^admin/', include(admin.site.urls)))
+urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
