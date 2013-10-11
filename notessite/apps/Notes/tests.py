@@ -8,7 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django_webtest import WebTest
-from models import Note
+from notessite.apps.Notes.models import Note
 
 
 class NotesViewsTestCase(TestCase):

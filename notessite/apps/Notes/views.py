@@ -2,7 +2,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.views.generic import ListView
-from models import Note
+from notessite.apps.Notes.models import Note
 
 
 def home(request):
@@ -18,4 +18,4 @@ class NotesListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-            return Note.objects.order_by("added")
+        return Note.objects.order_by("added")
