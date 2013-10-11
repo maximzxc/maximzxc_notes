@@ -28,7 +28,7 @@ class ListsTest(WebTest):
         note1 = Note.objects.get(pk=1)
         note2 = Note.objects.get(pk=2)
         page = self.app.get(reverse('notes_list'))
-        assert note1.title in page
-        assert note2.title in page
-        assert note1.content in page
-        assert note2.content in page
+        self.assertTrue(note1.title in page)
+        self.assertTrue(note2.title in page)
+        self.assertTrue(note1.content in page)
+        self.assertTrue(note2.content in page)
