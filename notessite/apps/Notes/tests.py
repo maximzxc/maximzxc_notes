@@ -6,11 +6,29 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from models import Note
+from django.core.urlresolvers import reverse
+from django_webtest import WebTest
+from notessite.apps.Notes.models import Note
+
 
 class NotesViewsTestCase(TestCase):
-	fixtures = ['notes_views_testdata.json']	
+    fixtures = ['notes_views_testdata.json']
 
-	def test_index(self):
-		resp = self.client.get('/notes/list/')
-		self.assertEqual(resp.status_code, 200)
+    def test_index(self):
+        resp = self.client.get(reverse('notes_list'))
+        self.assertEqual(resp.status_code, 200)
+        resp = self.client.get(reverse('home'))
+        self.assertEqual(resp.status_code, 200)
+
+
+class ListsTest(WebTest):
+    fixtures = ['notes_views_testdata.json']
+
+    def test_list(self):
+        note1 = Note.objects.get(pk=1)
+        note2 = Note.objects.get(pk=2)
+        page = self.app.get(reverse('notes_list'))
+        self.assertTrue(note1.title in page)
+        self.assertTrue(note2.title in page)
+        self.assertTrue(note1.content in page)
+        self.assertTrue(note2.content in page)

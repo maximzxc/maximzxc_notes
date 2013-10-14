@@ -1,20 +1,12 @@
 from django.conf.urls import patterns, include, url
+from notessite.apps.Notes.views import home
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
-from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-	(r'^notes/', include('notessite.apps.Notes.urls')),
-    # Examples:
-    # url(r'^$', 'notessite.views.home', name='home'),
-    # url(r'^notessite/', include('notessite.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
-)
+                       (r'^notes/', include('notessite.apps.Notes.urls')),
+                       url(r'^$', home, name='home'),
+                       (r'^admin/', include(admin.site.urls)))
