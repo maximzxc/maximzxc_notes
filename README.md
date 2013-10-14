@@ -1,8 +1,9 @@
+<<<<<<< HEAD
 <b>type this command in terminal for install this application:</b>
 
-git clone https://github.com/maximzxc/maximzxc_notes/tree/create-app-that-shows-list-of-text-notes
+git clone https://github.com/maximzxc/maximzxc_notes/
 
-cd create-app-that-shows-list-of-text-notes
+cd maxim_notes
 
 apt-get install virtualenv
 
