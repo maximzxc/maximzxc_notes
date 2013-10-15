@@ -11,6 +11,18 @@ def home(request):
         'base.html', {}, context_instance=RequestContext(request))
 
 
+def search_form(request):
+
+    return render_to_response(
+        'notes/search_form.html', {}, context_instance=RequestContext(request))
+
+
+def search(request):
+
+    return render_to_response(
+        'notes/search.html', {}, context_instance=RequestContext(request))
+
+
 class NotesListView(ListView):
 
     context_object_name = "notes_list"
