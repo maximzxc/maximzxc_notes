@@ -3,6 +3,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.views.generic import ListView
 from notessite.apps.Notes.models import Note
+from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
@@ -19,8 +21,14 @@ def search_form(request):
 
 def search(request):
 
-    return render_to_response(
-        'notes/search.html', {}, context_instance=RequestContext(request))
+    if 'id' in request.GET and request.GET['id']:
+        id = request.GET['id']
+        if id.isdigit():
+            return render(request, 'notes/search.html', {'id': id})
+        else:
+            return HttpResponse('Please submit a search term with integer.')
+    else:
+        return HttpResponse('Please submit a search term.')
 
 
 class NotesListView(ListView):

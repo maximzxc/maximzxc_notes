@@ -5,5 +5,8 @@ register = template.Library()
 
 @register.inclusion_tag("search.html")
 def search(id):
-    search = Note.objects.get(pk=id)
+    try:
+        search = Note.objects.get(pk=id)
+    except Note.DoesNotExist:
+        search = None
     return {'Note': search}

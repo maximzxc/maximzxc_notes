@@ -1,4 +1,8 @@
-title: {{Note.title}}<br>
-content: {{Note.content}}<br>
-added: {{Note.added}}<br>
-updated: {{Note.updated}}<br>
+{% if Note %} 
+  title: {{Note.title}}<br>
+  content: {{Note.content}}<br>
+  added: {{Note.added}}<br>
+  updated: {{Note.updated}}<br>
+{% else %}                                                                     
+  Note doesn't exist ;(                                                        
+{% endif %}
