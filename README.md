@@ -1,9 +1,9 @@
 <<<<<<< HEAD
 <b>type this command in terminal for install this application:</b>
 
-git clone https://github.com/maximzxc/maximzxc_notes/
+git clone https://github.com/maximzxc/maximzxc_notes/tree/Create-a-custom-inclusion-template-tag-that-will-render-one-text-note-by-given-id-of-note
 
-cd maxim_notes
+cd Create-a-custom-inclusion-template-tag-that-will-render-one-text-note-by-given-id-of-note
 
 apt-get install virtualenv
 
