@@ -1,9 +1,9 @@
 <<<<<<< HEAD
 <b>type this command in terminal for install this application:</b>
 
-git clone https://github.com/maximzxc/maximzxc_notes/
+git clone https://github.com/maximzxc/maximzxc_notes/tree/Add-ability-to-add-new-text-note
 
-cd maxim_notes
+cd Add-ability-to-add-new-text-note
 
 apt-get install virtualenv
 
