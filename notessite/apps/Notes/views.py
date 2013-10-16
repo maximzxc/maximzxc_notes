@@ -5,6 +5,7 @@ from django.views.generic import ListView
 from notessite.apps.Notes.models import Note
 from django.http import HttpResponse
 from django.shortcuts import render
+from notessite.apps.Notes.forms import NoteForm
 
 
 def home(request):
@@ -17,6 +18,21 @@ def search_form(request):
 
     return render_to_response(
         'notes/search_form.html', {}, context_instance=RequestContext(request))
+
+
+def add(request):
+
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = NoteForm()
+        else:
+            form = NoteForm()
+    else:
+        form = NoteForm()
+    return render(request, 'notes/add.html', {'form': form})
+
 
 
 def search(request):
