@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load render_notes  %}
+
+{% block active_home %}>{% endblock %}
+{% block active_search %}class="active">{% endblock %}
+{% block content %}
+  {% search id %}
+{% endblock %}
