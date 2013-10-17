@@ -6,8 +6,11 @@
     {% csrf_token %}
     {{ form.title}}<br>
     {{ form.title.errors }}
-    {{ form.content}}
+    {{ form.content}}<br>
     {{ form.content.errors }}
     <input type="submit" value="Add">
    </form> 
+{% block extrahead %}
+  {{ form.media }}
+{% endblock %}
 {% endblock %}

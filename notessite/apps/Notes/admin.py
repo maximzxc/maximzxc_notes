@@ -1,4 +1,9 @@
 from django.contrib import admin
 from notessite.apps.Notes.models import Note
+from notessite.apps.Notes.forms import NoteForm
 
-admin.site.register(Note)
+
+class NoteAdmin(admin.ModelAdmin):
+    form = NoteForm
+
+admin.site.register(Note, NoteAdmin)

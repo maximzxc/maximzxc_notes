@@ -36,7 +36,7 @@ class ListsTest(WebTest):
 
     def test_forms(self):
         page = self.app.get(reverse('add'))
-        form = page.click(u'Add', index= 0).form
+        form = page.click(u'Add', index=0).form
         form['title'] = 'example'
         form['content'] = 'exampleqwe123'
         form.submit()
@@ -48,6 +48,7 @@ class ListsTest(WebTest):
         form['content'] = 'examp1'
         form.submit()
         self.assertTrue(Note.objects.all().count, 3)
+        self.assertTrue('class="read_symbols"' in page)
 
 
 class TagTests(TestCase):
