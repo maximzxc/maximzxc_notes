@@ -1,5 +1,7 @@
 # Django settings for notessite project.
 import os
+import django.conf.global_settings as DEFAULT_SETTINGS
+
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
@@ -121,6 +123,11 @@ TEMPLATE_DIRS = (
     #"/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+)
+
+
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'notessite.apps.Notes.context_processors.count_notes',
 )
 
 INSTALLED_APPS = (

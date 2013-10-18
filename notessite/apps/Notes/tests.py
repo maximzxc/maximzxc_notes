@@ -33,6 +33,9 @@ class ListsTest(WebTest):
         self.assertTrue(note2.title in page)
         self.assertTrue(note1.content in page)
         self.assertTrue(note2.content in page)
+        #test symbols counter
+        test_counter = 'You have ' + str(Note.objects.count()) + ' notes'
+        self.assertTrue(test_counter in page)
 
     def test_forms(self):
         page = self.app.get(reverse('add'))
