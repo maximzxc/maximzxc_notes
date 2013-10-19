@@ -51,6 +51,9 @@ class ListsTest(WebTest):
         form['content'] = 'examp1'
         form.submit()
         self.assertTrue(Note.objects.all().count, 3)
+        self.assertTrue(
+            'Ensure this value has at least 10 characters (it has 6).'
+            in form.submit())
         self.assertTrue('class="read_symbols"' in page)
 
 

@@ -26,13 +26,9 @@ def add(request):
         form = NoteForm(request.POST)
         if form.is_valid():
             form.save()
-            form = NoteForm()
-        else:
-            form = NoteForm()
     else:
         form = NoteForm()
     return render(request, 'notes/add.html', {'form': form})
-
 
 
 def search(request):
