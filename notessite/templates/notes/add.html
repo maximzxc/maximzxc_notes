@@ -2,16 +2,16 @@
 
 {% block active_home %}>{% endblock %}
 {% block content %}
-<form action="{{add}}" method="POST">
+<form class='note_form' action="{{add}}" method="POST">
     {% csrf_token %}
+    <ul>
     {{ form.title}}<br>
-    {{ form.title.errors }}
     {{ form.content}}<br>
-    {{ form.content.errors }}
     <input type="submit" value="Add">
+    </ul>
    </form> 
 {% block extrahead %}
   {{ form.media }}
+  <script type="text/javascript" src="{{STATIC_URL}}js/form_ajax.js"></script>
 {% endblock %}
-<script type="text/javascript" src="{{STATIC_URL}}js/form_ajax.js"></script>
 {% endblock %}
