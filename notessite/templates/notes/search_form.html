@@ -7,4 +7,9 @@
     <input type="text" name="id">
     <input type="submit" value="Search">
   </form>
+  <div id="siteloader"></div>
+      <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+      <script>
+        $("#siteloader").html('<object data="http://localhost:8000/notes/insert/">');
+      </script>
 {% endblock %}

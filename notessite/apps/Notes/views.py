@@ -64,3 +64,11 @@ class NotesListView(ListView):
 
     def get_queryset(self):
         return Note.objects.order_by("-updated")
+
+
+class RandomNote(NotesListView):
+     context_object_name = "notes_list"
+     template_name = "insert.html"
+
+     def get_queryset(self):
+        return Note.objects.order_by("?")[:1]
