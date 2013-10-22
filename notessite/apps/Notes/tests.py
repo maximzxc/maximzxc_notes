@@ -8,7 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django_webtest import WebTest
-from notessite.apps.Notes.models import Note
+from notessite.apps.Notes.models import Note, Book
 from django.template import Context, Template
 from django.core.files import File
 
@@ -44,10 +44,10 @@ class ListsTest(WebTest):
         self.assertEqual(note.title, 'example')
         self.assertEqual(note.content, 'exampleqwe123')
         #test if content < 10 characters
+        c = Note.objects.count()
         send = {'title': 'example', 'content': 'example', 'image':
                 File(open('notessite/templates/media/img/UAbbmEdI4Z8.jpg'))}
-        c = Note.objects.all().count
-        self.assertTrue(Note.objects.all().count, c)
+        self.assertEqual(Note.objects.count(), c)
 
 
 class TagTests(TestCase):
@@ -60,3 +60,10 @@ class TagTests(TestCase):
         self.assertTrue("Note doesn't exist ;(" in t.render(c))
         c = Context({"id": 1})
         self.assertTrue(note.title in t.render(c))
+
+
+class ModelTest(TestCase):
+    fixtures = ['books_views_testdata.json']
+
+    def testBooks(self):
+        book = Book.objects.get(pk=1)
