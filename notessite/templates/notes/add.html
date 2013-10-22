@@ -2,16 +2,18 @@
 
 {% block active_home %}>{% endblock %}
 {% block content %}
-<form class='note_form' action="{{add}}" method="POST">
+<form class='note_form' action="{{add}}" method="POST" enctype=”multipart/form-data">
     {% csrf_token %}
     <ul>
-    {{ form.title}}<br>
-    {{ form.content}}<br>
+    {{ form.title }}<br>
+    {{ form.content }}<br>
+    {{ form.image }}<br>
     <input type="submit" value="Add">
     </ul>
-   </form> 
+</form> 
 {% block extrahead %}
   {{ form.media }}
   <script type="text/javascript" src="{{STATIC_URL}}js/form_ajax.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}js/jquery.form.js"></script>
 {% endblock %}
 {% endblock %}

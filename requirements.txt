@@ -4,3 +4,5 @@ pyflakes==0.7.3
 django-webtest==1.7.5
 WebTest==2.0.9
 pylint==1.0.0
+South==0.8.2
+Pillow==1.7.8
