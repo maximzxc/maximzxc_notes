@@ -1,6 +1,6 @@
 var frm = $('.note_form');
     frm.submit(function (ev) {
-        $.ajax({
+        frm.ajaxSubmit({
             type: frm.attr('method'),
             url: frm.attr('action'),
             data: frm.serialize(),
@@ -8,7 +8,7 @@ var frm = $('.note_form');
             success: function (data) {
                 frm.find('.error').remove();
                 if (data['result'] == 'success') {
-                    alert('Note was added');
+                    alert(data['response']);
                 }
                 else if (data['result'] == 'error') {
                     for (var k in data['response']) {

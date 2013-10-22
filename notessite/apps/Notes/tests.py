@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django_webtest import WebTest
 from notessite.apps.Notes.models import Note
 from django.template import Context, Template
+from django.core.files import File
 
 
 class NotesViewsTestCase(TestCase):
@@ -26,35 +27,27 @@ class ListsTest(WebTest):
     fixtures = ['notes_views_testdata.json']
 
     def test_list(self):
-        note1 = Note.objects.get(pk=1)
-        note2 = Note.objects.get(pk=2)
+        note1 = Note.objects.latest('updated')
         page = self.app.get(reverse('notes_list'))
         self.assertTrue(note1.title in page)
-        self.assertTrue(note2.title in page)
         self.assertTrue(note1.content in page)
-        self.assertTrue(note2.content in page)
         #test symbols counter
-        test_counter = 'You have ' + str(Note.objects.count()) + ' notes'
-        self.assertTrue(test_counter in page)
+        text_counter = 'You have ' + str(Note.objects.count()) + ' notes'
+        self.assertTrue(text_counter in page)
 
     def test_forms(self):
-        page = self.app.get(reverse('add'))
-        form = page.click(u'Add', index=0).form
-        form['title'] = 'example'
-        form['content'] = 'exampleqwe123'
-        form.submit()
-        note = Note.objects.get(pk=3)
+        send = {'title': 'example', 'content': 'exampleqwe123', 'image':
+                File(open('notessite/templates/media/img/UAbbmEdI4Z8.jpg'))}
+        self.client.post('/notes/add/', send,
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        note = Note.objects.latest('updated')
         self.assertEqual(note.title, 'example')
         self.assertEqual(note.content, 'exampleqwe123')
         #test if content < 10 characters
-        form['title'] = 'example'
-        form['content'] = 'examp1'
-        form.submit()
-        self.assertTrue(Note.objects.all().count, 3)
-        self.assertTrue(
-            'Ensure this value has at least 10 characters (it has 6).'
-            in form.submit())
-        self.assertTrue('class="read_symbols"' in page)
+        send = {'title': 'example', 'content': 'example', 'image':
+                File(open('notessite/templates/media/img/UAbbmEdI4Z8.jpg'))}
+        c = Note.objects.all().count
+        self.assertTrue(Note.objects.all().count, c)
 
 
 class TagTests(TestCase):

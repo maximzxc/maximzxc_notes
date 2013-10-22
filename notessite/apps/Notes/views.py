@@ -24,11 +24,11 @@ def search_form(request):
 def add(request):
 
     if request.method == 'POST' and request.is_ajax():
-        form = NoteForm(request.POST)
+        form = NoteForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponse(
-                simplejson.dumps({'response': ("Note was added"),
+                simplejson.dumps({'response': 'Note was added',
                                   'result': 'success'}),
                 mimetype='application/json')
         else:
