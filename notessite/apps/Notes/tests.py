@@ -44,10 +44,10 @@ class ListsTest(WebTest):
         self.assertEqual(note.title, 'example')
         self.assertEqual(note.content, 'exampleqwe123')
         #test if content < 10 characters
+        c = Note.objects.count()
         send = {'title': 'example', 'content': 'example', 'image':
                 File(open('notessite/templates/media/img/UAbbmEdI4Z8.jpg'))}
-        c = Note.objects.all().count
-        self.assertTrue(Note.objects.all().count, c)
+        self.assertTrue(Note.objects.count(), c)
 
 
 class TagTests(TestCase):
