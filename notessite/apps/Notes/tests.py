@@ -23,8 +23,25 @@ class NotesViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
-class ListsTest(WebTest):
+class NotesListsTest(WebTest):
     fixtures = ['notes_views_testdata.json']
+
+    def test_search_form(self):
+        search = self.app.get(reverse('search_form'))
+        self.assertTrue('Search' in search)
+        form = search.forms[0]
+        form['id'] = 'c'
+        k = form.submit().follow()
+        self.assertTrue('Please submit a search term with integer.' in k)
+        form = search.forms[0]
+        form['id'] = ''
+        k = form.submit().follow()
+        self.assertTrue('Please submit a search term.' in k)
+        form = search.forms[0]
+        form['id'] = 1
+        k = form.submit().follow()
+        note = Note.objects.get(pk=1)
+        self.assertTrue(note.title in k)
 
     def test_list(self):
         note1 = Note.objects.latest('updated')
@@ -38,16 +55,26 @@ class ListsTest(WebTest):
     def test_forms(self):
         send = {'title': 'example', 'content': 'exampleqwe123', 'image':
                 File(open('notessite/templates/media/img/UAbbmEdI4Z8.jpg'))}
-        self.client.post('/notes/add/', send,
+        self.client.post(reverse('add'), send,
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         note = Note.objects.latest('updated')
         self.assertEqual(note.title, 'example')
         self.assertEqual(note.content, 'exampleqwe123')
+        c = Note.objects.count()
+        self.client.get(reverse('add'), send,
+                        HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(Note.objects.count(), c)
         #test if content < 10 characters
         c = Note.objects.count()
         send = {'title': 'example', 'content': 'example', 'image':
                 File(open('notessite/templates/media/img/UAbbmEdI4Z8.jpg'))}
+        self.client.post(reverse('add'), send,
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(Note.objects.count(), c)
+
+    def test_random_note(self):
+        page = self.client.get(reverse('insert'))
+        self.assertEqual(page.status_code, 200)
 
 
 class TagTests(TestCase):
