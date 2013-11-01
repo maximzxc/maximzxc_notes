@@ -2,6 +2,7 @@
 
 {% block active_home %}>{% endblock %}
 {% block content %}
+{{ text }}
 <form action="{{add}}" method="POST">
     {% csrf_token %}
     {{ form.title}}<br>

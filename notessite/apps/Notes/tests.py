@@ -1,10 +1,3 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django_webtest import WebTest
@@ -22,7 +15,7 @@ class NotesViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
-class ListsTest(WebTest):
+class NotesTest(WebTest):
     fixtures = ['notes_views_testdata.json']
 
     def test_list(self):
@@ -35,19 +28,21 @@ class ListsTest(WebTest):
         self.assertTrue(note2.content in page)
 
     def test_forms(self):
+        c = Note.objects.count() + 1
         page = self.app.get(reverse('add'))
-        form = page.click(u'Add', index= 0).form
+        form = page.click(u'Add', index=0).form
         form['title'] = 'example'
         form['content'] = 'exampleqwe123'
         form.submit()
         note = Note.objects.get(pk=3)
         self.assertEqual(note.title, 'example')
         self.assertEqual(note.content, 'exampleqwe123')
+        self.assertEqual(Note.objects.count(), c)
         #test if content < 10 characters
         form['title'] = 'example'
         form['content'] = 'examp1'
         form.submit()
-        self.assertTrue(Note.objects.all().count, 3)
+        self.assertEqual(Note.objects.count(), c)
 
 
 class TagTests(TestCase):
