@@ -93,4 +93,10 @@ class ModelTest(TestCase):
     fixtures = ['books_views_testdata.json']
 
     def testBooks(self):
+        note1 = Note.objects.get(pk=2)
+        note2 = Note.objects.get(pk=1)
         book = Book.objects.get(pk=1)
+        book.notes.add(note1)
+        book.notes.add(note2)
+        self.assertTrue(note1 in book.notes.all())
+        self.assertTrue(note2 in book.notes.all())
