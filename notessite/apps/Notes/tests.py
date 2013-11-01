@@ -26,16 +26,13 @@ class ListsTest(WebTest):
     fixtures = ['notes_views_testdata.json']
 
     def test_list(self):
-        note1 = Note.objects.get(pk=1)
-        note2 = Note.objects.get(pk=2)
+        note1 = Note.objects.latest('updated')
         page = self.app.get(reverse('notes_list'))
         self.assertTrue(note1.title in page)
-        self.assertTrue(note2.title in page)
         self.assertTrue(note1.content in page)
-        self.assertTrue(note2.content in page)
         #test symbols counter
-        test_counter = 'You have ' + str(Note.objects.count()) + ' notes'
-        self.assertTrue(test_counter in page)
+        text_counter = 'You have ' + str(Note.objects.count()) + ' notes'
+        self.assertTrue(text_counter in page)
 
     def test_forms(self):
         c = Note.objects.count()
