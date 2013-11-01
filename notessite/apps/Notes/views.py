@@ -10,19 +10,29 @@ from django.utils import simplejson
 
 
 def home(request):
-
+    '''
+    home page
+    '''
     return render_to_response(
         'base.html', {}, context_instance=RequestContext(request))
 
 
 def search_form(request):
-
+    '''
+    page for searching
+    contains search form
+    '''
     return render_to_response(
         'notes/search_form.html', {}, context_instance=RequestContext(request))
 
 
 def add(request):
-
+    '''
+    page for adding notes
+    it checks if request method is POST and if form is valid
+    in this case it save it and reload page
+    in other case it just reload page and show errors
+    '''
     if request.method == 'POST' and request.is_ajax():
         form = NoteForm(request.POST, request.FILES)
         if form.is_valid():
@@ -41,11 +51,14 @@ def add(request):
                 mimetype='application/json')
     else:
         form = NoteForm()
-    return render(request, 'notes/add.html', {'form': form})
+        return render(request, 'notes/add.html', {'form': form})
 
 
 def search(request):
-
+    '''
+    after sending search form this page start working
+    it checks if form is valid and if it is shows note that you need
+    '''
     if 'id' in request.GET and request.GET['id']:
         id = request.GET['id']
         if id.isdigit():
@@ -57,7 +70,9 @@ def search(request):
 
 
 class NotesListView(ListView):
-
+    '''
+    show list of exist notes
+    '''
     context_object_name = "notes_list"
     template_name = "notes/list.html"
     paginate_by = 10
@@ -67,8 +82,8 @@ class NotesListView(ListView):
 
 
 class RandomNote(NotesListView):
-     context_object_name = "notes_list"
-     template_name = "insert.html"
+    context_object_name = "notes_list"
+    template_name = "insert.html"
 
-     def get_queryset(self):
+    def get_queryset(self):
         return Note.objects.order_by("?")[:1]

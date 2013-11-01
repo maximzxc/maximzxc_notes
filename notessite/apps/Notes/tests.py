@@ -1,10 +1,3 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django_webtest import WebTest
@@ -23,7 +16,7 @@ class NotesViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
-class ListsTest(WebTest):
+class NotesTest(WebTest):
     fixtures = ['notes_views_testdata.json']
 
     def test_list(self):
@@ -38,16 +31,22 @@ class ListsTest(WebTest):
     def test_forms(self):
         send = {'title': 'example', 'content': 'exampleqwe123', 'image':
                 File(open('notessite/templates/media/img/UAbbmEdI4Z8.jpg'))}
-        self.client.post('/notes/add/', send,
+        self.client.post(reverse('add'), send,
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         note = Note.objects.latest('updated')
         self.assertEqual(note.title, 'example')
         self.assertEqual(note.content, 'exampleqwe123')
+        c = Note.objects.count()
+        self.client.get(reverse('add'), send,
+                        HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(Note.objects.count(), c)
         #test if content < 10 characters
+        c = Note.objects.count()
         send = {'title': 'example', 'content': 'example', 'image':
                 File(open('notessite/templates/media/img/UAbbmEdI4Z8.jpg'))}
-        c = Note.objects.all().count
-        self.assertTrue(Note.objects.all().count, c)
+        self.client.post(reverse('add'), send,
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(Note.objects.count(), c)
 
 
 class TagTests(TestCase):
