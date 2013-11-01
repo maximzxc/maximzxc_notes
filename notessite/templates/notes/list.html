@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load render_notes  %}
 
 {% block active_home %}>{% endblock %}
 {% block active_list %}class="active">{% endblock %}
@@ -6,13 +7,7 @@
     {% if notes_list %}
     <ul>
     {% for note in notes_list %}
-	  Title:<b> {{note.title}}</b><br>
-		{{note.content}}<br>
-    {% if note.image  %}
-    <img src="{{MEDIA_URL}}{{note.image}}" WIDTH="300" HEIGHT="300"><br>
-    {% endif  %}
-		Note was added: {{note.added}}<br>
-		Last update: {{note.updated}}<br><br>
+      {% search note.pk %} </br>
     {% endfor %}
     </ul>
     {% if is_paginated %}
