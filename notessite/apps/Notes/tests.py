@@ -38,23 +38,26 @@ class ListsTest(WebTest):
         self.assertTrue(test_counter in page)
 
     def test_forms(self):
-        page = self.app.get(reverse('add'))
-        form = page.click(u'Add', index=0).form
-        form['title'] = 'example'
-        form['content'] = 'exampleqwe123'
-        form.submit()
-        note = Note.objects.get(pk=3)
+        c = Note.objects.count()
+        send = {'title': 'example', 'content': 'exampleqwe123'}
+        resp = self.client.post(reverse('add'), send,
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertContains(resp, 'Note was added')
+        self.assertEqual(Note.objects.count(), c+1)
+        note = Note.objects.latest('updated')
         self.assertEqual(note.title, 'example')
         self.assertEqual(note.content, 'exampleqwe123')
+        c = Note.objects.count()
+        self.client.get(reverse('add'), send,
+                        HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(Note.objects.count(), c)
         #test if content < 10 characters
-        form['title'] = 'example'
-        form['content'] = 'examp1'
-        form.submit()
-        self.assertTrue(Note.objects.all().count, 3)
-        self.assertTrue(
-            'Ensure this value has at least 10 characters (it has 6).'
-            in form.submit())
-        self.assertTrue('class="read_symbols"' in page)
+        c = Note.objects.count()
+        send = {'title': 'example', 'content': 'example'}
+        resp = self.client.post(reverse('add'), send,
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertNotContains(resp, 'Note was added')
+        self.assertEqual(Note.objects.count(), c)
 
 
 class TagTests(TestCase):
