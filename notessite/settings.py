@@ -3,6 +3,7 @@ import os
 import django.conf.global_settings as DEFAULT_SETTINGS
 
 SOUTH_TESTS_MIGRATE = False
+TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
@@ -143,6 +144,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'notessite.apps.Notes',
+    'django_coverage',
     'south',
 )
 

@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django_webtest import WebTest
-from notessite.apps.Notes.models import Note
+from notessite.apps.Notes.models import Note, Book
 from django.template import Context, Template
 from django.core.files import File
 
@@ -18,6 +18,23 @@ class NotesViewsTestCase(TestCase):
 
 class NotesTest(WebTest):
     fixtures = ['notes_views_testdata.json']
+
+    def test_search_form(self):
+        search = self.app.get(reverse('search_form'))
+        self.assertTrue('Search' in search)
+        form = search.forms[0]
+        form['id'] = 'c'
+        k = form.submit().follow()
+        self.assertTrue('Please submit a search term with integer.' in k)
+        form = search.forms[0]
+        form['id'] = ''
+        k = form.submit().follow()
+        self.assertTrue('Please submit a search term.' in k)
+        form = search.forms[0]
+        form['id'] = 1
+        k = form.submit().follow()
+        note = Note.objects.get(pk=1)
+        self.assertTrue(note.title in k)
 
     def test_list(self):
         note1 = Note.objects.latest('updated')
@@ -48,6 +65,10 @@ class NotesTest(WebTest):
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(Note.objects.count(), c)
 
+    def test_random_note(self):
+        page = self.client.get(reverse('insert'))
+        self.assertEqual(page.status_code, 200)
+
 
 class TagTests(TestCase):
     fixtures = ['notes_views_testdata.json']
@@ -59,3 +80,16 @@ class TagTests(TestCase):
         self.assertTrue("Note doesn't exist ;(" in t.render(c))
         c = Context({"id": 1})
         self.assertTrue(note.title in t.render(c))
+
+
+class ModelTest(TestCase):
+    fixtures = ['books_views_testdata.json']
+
+    def testBooks(self):
+        note1 = Note.objects.get(pk=2)
+        note2 = Note.objects.get(pk=1)
+        book = Book.objects.get(pk=1)
+        book.notes.add(note1)
+        book.notes.add(note2)
+        self.assertTrue(note1 in book.notes.all())
+        self.assertTrue(note2 in book.notes.all())

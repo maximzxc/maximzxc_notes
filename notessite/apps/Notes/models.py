@@ -31,3 +31,19 @@ class Note(models.Model):
 
     class Meta:
         ordering = ['-updated']
+
+    def __unicode__(self):
+        return self.title
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    notes = models.ManyToManyField(Note)
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-updated']
+
+    def __unicode__(self):
+        return self.title
