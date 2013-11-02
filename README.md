@@ -29,6 +29,8 @@ python manage.py migrate
 
 python manage.py loaddata fixtures notes_views_testdata.json
 
+python manage.py loaddata fixtures books_views_testdata.json
+
 python manage.py runserver
 
 <b>open browser and go to see notes that already exists:</b>
