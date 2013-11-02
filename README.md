@@ -16,7 +16,9 @@ source .env/bin/activate
 sudo apt-get build-dep python-imaging
 
 sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/
+
 sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/
+
 sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/
 
 pip install -r requirements.txt
