@@ -2,10 +2,10 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.views.generic import ListView
-from notessite.apps.Notes.models import Note
+from Notes.models import Note
 from django.http import HttpResponse
 from django.shortcuts import render
-from notessite.apps.Notes.forms import NoteForm
+from Notes.forms import NoteForm
 
 
 def home(request):

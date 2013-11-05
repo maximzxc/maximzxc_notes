@@ -1,5 +1,5 @@
 from django import template
-from notessite.apps.Notes.models import Note
+from Notes.models import Note
 register = template.Library()
 
 

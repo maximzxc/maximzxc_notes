@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django_webtest import WebTest
-from notessite.apps.Notes.models import Note
+from Notes.models import Note
 from django.template import Context, Template
 
 
