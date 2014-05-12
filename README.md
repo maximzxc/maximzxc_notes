@@ -1,7 +1,7 @@
 <b>type this command in terminal for install this application:</b>
 git clone https://github.com/maximzxc/maximzxc_notes
 
-cd maxim_notes
+cd maximzxc_notes
 
 apt-get install virtualenv
 
