@@ -23,11 +23,12 @@ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/
 
 pip install -r requirements.txt
 
+python manage.py syncdb --noinput --migrate --all
+
 python manage.py migrate
 
-python manage.py syncdb --noinput
-
 python manage.py migrate --fake
+
 
 python manage.py loaddata fixtures notes_views_testdata.json
 
