@@ -2,9 +2,6 @@
 import os
 import django.conf.global_settings as DEFAULT_SETTINGS
 
-SOUTH_TESTS_MIGRATE = False
-TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
-
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 DEBUG = True
@@ -59,26 +56,10 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'templates/media')
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = '/media/'
-
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/var/www/example.com/static/"
 STATIC_ROOT = ''
 
-# URL prefix for static files.
-# Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
-# Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
@@ -128,9 +109,7 @@ TEMPLATE_DIRS = (
 )
 
 
-TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
-    'notessite.apps.Notes.context_processors.count_notes',
-)
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -144,8 +123,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'notessite.apps.Notes',
-    'django_coverage',
-    'south',
 )
 
 # A sample logging configuration. The only tangible logging

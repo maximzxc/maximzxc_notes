@@ -3,13 +3,10 @@
 {% block active_home %}>{% endblock %}
 {% block active_search %}class="active">{% endblock %}
 {% block content %}
+<div><p>{{ status }}</p></div>
   <form action="/notes/search" method="GET">
-    <input type="text" name="id">
+    <input type="text" name="range">
     <input type="submit" value="Search">
   </form>
-  <div id="siteloader"></div>
       <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-      <script>
-        $("#siteloader").html('<object data="http://localhost:8000/notes/insert/">');
-      </script>
 {% endblock %}
